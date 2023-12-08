@@ -55,6 +55,8 @@ def fees_report(infile, outfile):
             if late_days > 0:
                 late_fee = late_days * 0.25
                 late_fees[patron_id] += late_fee
+            else:
+                late_fees[patron_id] = 0.00
 
     with open(outfile, 'w') as csvfile:
         writer = DictWriter(csvfile, fieldnames=['patron_id', 'late_fees'])
@@ -79,8 +81,8 @@ if __name__ == '__main__':
     except ImportError:
         from util import get_data_file_path
 
-    BOOK_RETURNS_PATH = get_data_file_path('book_returns.csv')
-    #BOOK_RETURNS_PATH = get_data_file_path('book_returns_short.csv')
+    #BOOK_RETURNS_PATH = get_data_file_path('book_returns.csv')
+    BOOK_RETURNS_PATH = get_data_file_path('book_returns_short.csv')
 
     OUTFILE = 'book_fees.csv'
 
